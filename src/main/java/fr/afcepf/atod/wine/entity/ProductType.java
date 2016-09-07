@@ -1,4 +1,4 @@
-package fr.afcepf.atod.vin.entity;
+package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.Column;
@@ -13,14 +13,15 @@ import javax.persistence.Transient;
 /**
  * by roro
  */
-@Table(name = "ProductVarietal")
+@Table(name = "ProductType")
 @Entity
-public class ProductVarietal implements Serializable {
+public class ProductType implements Serializable {
     /**
-     * columns
+     * columns size
      */
     @Transient
     private static final int MAX_SIZE = 50;
+  
     /**
      * id
      */
@@ -29,34 +30,39 @@ public class ProductVarietal implements Serializable {
     private Integer id;
 
     /**
-     * description
+     * type
      */
-    @Column(name     = "description",
+    @Column(name     = "type",
             length   = MAX_SIZE*2,
             nullable = false)
-    private String description;
+    private String type;
     
     /**
-     * products
+     * products wine
      */
-    @OneToMany(mappedBy = "productVarietal")
+    @OneToMany(mappedBy = "productType")
     private Set<ProductWine> productsWine;
     
     
-    // -------- Construtors -----------//
     
-     /**
+    // ---------- Constructors -----------//
+      /**
      * Default constructor
      */
-    public ProductVarietal() {
+    public ProductType() {
     }
-    
-    public ProductVarietal(Integer id, String description) {
+    /**
+     * 
+     * @param id
+     * @param type 
+     */
+    public ProductType(Integer id, String type) {
         this.id = id;
-        this.description = description;
+        this.type = type;
     }
-    
-    // -------- Getters && Setters ----------//
+        
+
+    // ----------- Getters && Setters ----------//
 
     public Integer getId() {
         return id;
@@ -66,12 +72,12 @@ public class ProductVarietal implements Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getType() {
+        return type;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Set<ProductWine> getProductsWine() {

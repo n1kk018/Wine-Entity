@@ -1,4 +1,4 @@
-package fr.afcepf.atod.vin.entity;
+package fr.afcepf.atod.wine.entity;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -15,22 +15,31 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
- * by roroab
+ * by roro
  */
 @Entity
-@Table(name = "Region")
-public class Region implements Serializable {
+@Table(name = "City")
+public class City implements Serializable {
     /**
-     * useful size columns
+     * max size columns
      */
     @Transient
     private static final int MAX_SIZE = 50;
+   
     /**
-     * id
+     * 
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    /**
+     * zipcode
+     */
+    @Column(name     = "zipcode",
+            length   = MAX_SIZE,
+            nullable = false)
+    private String zipcode;
 
     /**
      * name
@@ -41,45 +50,55 @@ public class Region implements Serializable {
     private String name;
 
     /**
-     * country
+     * region
      */
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCountry", nullable = true)
-    private Country country;
+    @JoinColumn(name = "idRegion", nullable = false)
+    private Region region;
     
     /**
-     * set cities
+     * adress's'
      */
-    @OneToMany(mappedBy = "region")
-    private Set<City> cities;
-    // -------- Constructors ---------//
-
-    /**
+    @OneToMany(mappedBy = "city")
+    private Set<Adress> setAdress;
+    
+    // ------------ constructors ------------// 
+    
+     /**
      * Default constructor
      */
-    public Region() {
-        
+    public City() {
     }
     /**
      * 
      * @param id
+     * @param zipcode
      * @param name
-     * @param country 
+     * @param region 
      */
-    public Region(Integer id, String name, Country country) {
+    public City(Integer id, String zipcode, String name, Region region) {
         this.id = id;
+        this.zipcode = zipcode;
         this.name = name;
-        this.country = country;
+        this.region = region;
     }
     
-    // --------- getters && setters ----//
-
+    // ------------ getters && setters --------//
+    
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
     public String getName() {
@@ -90,19 +109,21 @@ public class Region implements Serializable {
         this.name = name;
     }
 
-    public Country getCountry() {
-        return country;
+    public Region getRegion() {
+        return region;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setRegion(Region region) {
+        this.region = region;
     }
 
-    public Set<City> getCities() {
-        return cities;
+    public Set<Adress> getSetAdress() {
+        return setAdress;
     }
 
-    public void setCities(Set<City> cities) {
-        this.cities = cities;
+    public void setSetAdress(Set<Adress> setAdress) {
+        this.setAdress = setAdress;
     }
+    
+    
 }

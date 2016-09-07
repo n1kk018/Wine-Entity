@@ -1,4 +1,4 @@
-package fr.afcepf.atod.vin.entity;
+package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.Column;
@@ -13,15 +13,14 @@ import javax.persistence.Transient;
 /**
  * by roro
  */
-@Table(name = "ProductType")
+@Table(name = "ProductVarietal")
 @Entity
-public class ProductType implements Serializable {
+public class ProductVarietal implements Serializable {
     /**
-     * columns size
+     * columns
      */
     @Transient
     private static final int MAX_SIZE = 50;
-  
     /**
      * id
      */
@@ -30,39 +29,34 @@ public class ProductType implements Serializable {
     private Integer id;
 
     /**
-     * type
+     * description
      */
-    @Column(name     = "type",
+    @Column(name     = "description",
             length   = MAX_SIZE*2,
             nullable = false)
-    private String type;
+    private String description;
     
     /**
-     * products wine
+     * products
      */
-    @OneToMany(mappedBy = "productType")
+    @OneToMany(mappedBy = "productVarietal")
     private Set<ProductWine> productsWine;
     
     
+    // -------- Construtors -----------//
     
-    // ---------- Constructors -----------//
-      /**
+     /**
      * Default constructor
      */
-    public ProductType() {
+    public ProductVarietal() {
     }
-    /**
-     * 
-     * @param id
-     * @param type 
-     */
-    public ProductType(Integer id, String type) {
+    
+    public ProductVarietal(Integer id, String description) {
         this.id = id;
-        this.type = type;
+        this.description = description;
     }
-        
-
-    // ----------- Getters && Setters ----------//
+    
+    // -------- Getters && Setters ----------//
 
     public Integer getId() {
         return id;
@@ -72,12 +66,12 @@ public class ProductType implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getDescription() {
+        return description;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<ProductWine> getProductsWine() {

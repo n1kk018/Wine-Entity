@@ -1,4 +1,4 @@
-package fr.afcepf.atod.vin.entity;
+package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.CascadeType;

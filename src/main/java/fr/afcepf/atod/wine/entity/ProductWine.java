@@ -1,4 +1,4 @@
-package fr.afcepf.atod.vin.entity;
+package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.CascadeType;
@@ -129,6 +129,15 @@ public class ProductWine extends Product implements Serializable {
 
     public void setRegion(Region region) {
         this.region = region;
-    }    
+    }
+
+	@Override
+	public String toString() {
+		return "ProductWine [appellation=" + appellation + ", vintage=" + vintage + ", productType=" + productType
+				+ ", productVarietal=" + productVarietal + ", region=" + region + ", id=" + id + ", name=" + name
+				+ ", price=" + price + ", description=" + description + "]";
+	}    
+    
+    
     
 }

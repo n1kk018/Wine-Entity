@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.afcepf.atod.vin.entity;
+package fr.afcepf.atod.wine.entity;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;

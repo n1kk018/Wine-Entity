@@ -1,4 +1,4 @@
-package fr.afcepf.atod.vin.entity;
+package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.CascadeType;
@@ -166,5 +166,11 @@ public class Product implements Serializable {
 	}
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + "]";
 	}    
+	
+	
 }
