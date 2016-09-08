@@ -81,5 +81,10 @@ public class ProductVarietal implements Serializable {
     public void setProductsWine(Set<ProductWine> productsWine) {
         this.productsWine = productsWine;
     }
+
+	/*@Override
+	public String toString() {
+		return "ProductVarietal [id=" + id + ", description=" + description + ", productsWine=" + productsWine + "]";
+	}**/
     
 }
