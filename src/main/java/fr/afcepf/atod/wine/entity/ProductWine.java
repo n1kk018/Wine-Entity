@@ -32,9 +32,23 @@ public class ProductWine extends Product implements Serializable {
      * vintage
      */
     @Column(name     = "vintage",
-            length   = MAX_SIZE,
             nullable = true)
     private Integer vintage;
+    
+    /**
+     * apiId
+     */
+    @Column(name     = "apiId",
+            nullable = true)
+    private Integer apiId;
+    
+    /**
+     * imagesUrl
+     */
+    @Column(name     = "imagesUrl",
+            length   = 1024,
+            nullable = true)
+    private String imagesUrl;
 
     /**
      * product type
@@ -56,7 +70,7 @@ public class ProductWine extends Product implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idRegion", nullable = true)
     private Region region;
-    
+        
     
     // --------- Constructors ---------- //
     
@@ -79,7 +93,7 @@ public class ProductWine extends Product implements Serializable {
      * @param region 
      */
     public ProductWine(Integer id, String name, Double price,
-                       String description, String appellation, Integer vintage, 
+                       String description, String appellation, Integer vintage, Integer apiId,
                        ProductType productType, ProductVarietal productVarietal,
                        Region region) {
         super(id, name, price, description);
@@ -88,6 +102,7 @@ public class ProductWine extends Product implements Serializable {
         this.productType = productType;
         this.productVarietal = productVarietal;
         this.region = region;
+        this.apiId = apiId;
     }
         
     // ------- Getters && Setters --------//
@@ -131,6 +146,14 @@ public class ProductWine extends Product implements Serializable {
     public void setRegion(Region region) {
         this.region = region;
     }
+    
+	public Integer getApiId() {
+		return apiId;
+	}
+
+	public void setApiId(Integer apiId) {
+		this.apiId = apiId;
+	}
 
 	@Override
 	public String toString() {
