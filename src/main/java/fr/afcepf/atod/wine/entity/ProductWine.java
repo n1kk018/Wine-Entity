@@ -29,6 +29,28 @@ public class ProductWine extends Product implements Serializable {
     private String appellation;
 
     /**
+     * vintage
+     */
+    @Column(name     = "vintage",
+            nullable = true)
+    private Integer vintage;
+    
+    /**
+     * apiId
+     */
+    @Column(name     = "apiId",
+            nullable = true)
+    private Integer apiId;
+    
+    /**
+     * imagesUrl
+     */
+    @Column(name     = "imagesUrl",
+            length   = 1024,
+            nullable = true)
+    private String imagesUrl;
+
+    /**
      * product type
      */
     @ManyToOne(cascade = CascadeType.ALL)
@@ -48,8 +70,7 @@ public class ProductWine extends Product implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idProductVarietal", nullable = true)
     private ProductVarietal productVarietal;
-    
-    
+
     // --------- Constructors ---------- //
     
     /**
@@ -71,12 +92,14 @@ public class ProductWine extends Product implements Serializable {
      * @param region 
      */
     public ProductWine(Integer id, String name, Double price,
-                       String description, String appellation,
-                       ProductType productType, ProductVarietal productVarietal, ProductVintage productVintage) {
+    				   String description, String appellation,
+                       ProductType productType, ProductVarietal productVarietal, 
+                       ProductVintage productVintage, Integer apiId) {
         super(id, name, price, description);
         this.appellation = appellation;
         this.productType = productType;
         this.productVarietal = productVarietal;
+        this.apiId = apiId;
     }
         
     // ------- Getters && Setters --------//
@@ -111,6 +134,14 @@ public class ProductWine extends Product implements Serializable {
 
 	public void setProductVintage(ProductVintage productVintage) {
 		this.productVintage = productVintage;
+	}
+    
+	public Integer getApiId() {
+		return apiId;
+	}
+
+	public void setApiId(Integer apiId) {
+		this.apiId = apiId;
 	}
 
 	@Override
