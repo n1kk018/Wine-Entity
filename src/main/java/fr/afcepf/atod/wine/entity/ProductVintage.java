@@ -13,14 +13,15 @@ import javax.persistence.Transient;
 /**
  * by roro
  */
-@Table(name = "ProductVarietal")
+@Table(name = "ProductVintage")
 @Entity
-public class ProductVarietal implements Serializable {
+public class ProductVintage implements Serializable {
     /**
-     * columns
+     * columns size
      */
     @Transient
     private static final int MAX_SIZE = 50;
+  
     /**
      * id
      */
@@ -29,34 +30,38 @@ public class ProductVarietal implements Serializable {
     private Integer id;
 
     /**
-     * description
+     * year
      */
-    @Column(name     = "description",
-            length   = MAX_SIZE*2,
-            nullable = false)
-    private String description;
+    @Column(name = "year",
+            nullable = true)
+    private Integer year;
     
     /**
-     * products
+     * products wine
      */
-    @OneToMany(mappedBy = "productVarietal")
+    @OneToMany(mappedBy = "productVintage")
     private Set<ProductWine> productsWine;
     
     
-    // -------- Construtors -----------//
     
-     /**
+    // ---------- Constructors -----------//
+      /**
      * Default constructor
      */
-    public ProductVarietal() {
+    public ProductVintage() {
     }
-    
-    public ProductVarietal(Integer id, String description) {
+    /**
+     * 
+     * @param id
+     * @param type 
+     */
+    public ProductVintage(Integer id, Integer year) {
         this.id = id;
-        this.description = description;
+        this.year = year;
     }
-    
-    // -------- Getters && Setters ----------//
+        
+
+    // ----------- Getters && Setters ----------//
 
     public Integer getId() {
         return id;
@@ -66,24 +71,24 @@ public class ProductVarietal implements Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<ProductWine> getProductsWine() {
+    public Integer getYear() {
+		return year;
+	}
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+	public Set<ProductWine> getProductsWine() {
         return productsWine;
     }
 
     public void setProductsWine(Set<ProductWine> productsWine) {
         this.productsWine = productsWine;
     }
-
 	@Override
 	public String toString() {
-		return "ProductVarietal [id=" + id + ", description=" + description + "]";
+		return "ProductVintage[id=" + id + ", year=" + year + "]";
 	}
+    
 }

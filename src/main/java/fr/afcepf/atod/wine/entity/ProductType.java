@@ -87,9 +87,10 @@ public class ProductType implements Serializable {
     public void setProductsWine(Set<ProductWine> productsWine) {
         this.productsWine = productsWine;
     }
-	/*@Override
+	
+    @Override
 	public String toString() {
-		return "ProductType [id=" + id + ", type=" + type + ", productsWine=" + productsWine + "]";
-	}*/
+		return "ProductType [id=" + id + ", type=" + type + "]";
+	}
     
 }

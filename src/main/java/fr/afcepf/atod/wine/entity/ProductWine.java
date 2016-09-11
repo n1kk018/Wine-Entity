@@ -29,19 +29,18 @@ public class ProductWine extends Product implements Serializable {
     private String appellation;
 
     /**
-     * vintage
-     */
-    @Column(name     = "vintage",
-            length   = MAX_SIZE,
-            nullable = true)
-    private Integer vintage;
-
-    /**
      * product type
      */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idProductType", nullable = true)
     private ProductType productType;
+    
+    /**
+     * product vintage
+     */
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idProductVintage", nullable = true)
+    private ProductVintage productVintage;
 
     /**
      * varietal
@@ -49,13 +48,6 @@ public class ProductWine extends Product implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idProductVarietal", nullable = true)
     private ProductVarietal productVarietal;
-
-    /**
-     * region
-     */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idRegion", nullable = true)
-    private Region region;
     
     
     // --------- Constructors ---------- //
@@ -79,15 +71,12 @@ public class ProductWine extends Product implements Serializable {
      * @param region 
      */
     public ProductWine(Integer id, String name, Double price,
-                       String description, String appellation, Integer vintage, 
-                       ProductType productType, ProductVarietal productVarietal,
-                       Region region) {
+                       String description, String appellation,
+                       ProductType productType, ProductVarietal productVarietal, ProductVintage productVintage) {
         super(id, name, price, description);
         this.appellation = appellation;
-        this.vintage = vintage;
         this.productType = productType;
         this.productVarietal = productVarietal;
-        this.region = region;
     }
         
     // ------- Getters && Setters --------//
@@ -98,14 +87,6 @@ public class ProductWine extends Product implements Serializable {
 
     public void setAppellation(String appellation) {
         this.appellation = appellation;
-    }
-
-    public Integer getVintage() {
-        return vintage;
-    }
-
-    public void setVintage(Integer vintage) {
-        this.vintage = vintage;
     }
 
     public ProductType getProductType() {
@@ -123,19 +104,19 @@ public class ProductWine extends Product implements Serializable {
     public void setProductVarietal(ProductVarietal productVarietal) {
         this.productVarietal = productVarietal;
     }
+    
+	public ProductVintage getProductVintage() {
+		return productVintage;
+	}
 
-    public Region getRegion() {
-        return region;
-    }
-
-    public void setRegion(Region region) {
-        this.region = region;
-    }
+	public void setProductVintage(ProductVintage productVintage) {
+		this.productVintage = productVintage;
+	}
 
 	@Override
 	public String toString() {
-		return "ProductWine [appellation=" + appellation + ", vintage=" + vintage + ", productType=" + productType
-				+ ", productVarietal=" + productVarietal + ", region=" + region + ", id=" + id + ", name=" + name
+		return "ProductWine [appellation=" + appellation + ", productType=" + productType
+				+ ", productVarietal=" + productVarietal + ", id=" + id + ", name=" + name
 				+ ", price=" + price + ", description=" + description + "]";
 	}    
     
