@@ -27,13 +27,6 @@ public class ProductWine extends Product implements Serializable {
             length   = MAX_SIZE,
             nullable = true)
     private String appellation;
-
-    /**
-     * vintage
-     */
-    @Column(name     = "vintage",
-            nullable = true)
-    private Integer vintage;
     
     /**
      * apiId
