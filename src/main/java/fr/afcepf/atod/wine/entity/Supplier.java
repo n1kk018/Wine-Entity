@@ -1,21 +1,23 @@
 package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
 import java.util.*;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
  * by roro
  */
-@Table(name = "Supplier")
 @Entity
+@Table(name = "Supplier")
 public class Supplier implements Serializable{
     /**
      * size columns
@@ -26,10 +28,8 @@ public class Supplier implements Serializable{
     /**
      * id
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    private Integer idSupplier;
+    
     /**
      * name
      */
@@ -64,9 +64,7 @@ public class Supplier implements Serializable{
     /**
      * products
      */
-    @ManyToMany(cascade = CascadeType.ALL,
-                mappedBy = "stockSuppliers")
-    private Set<Product> stockProducts;
+    private Set<ProductSupplier> productSuppliers = new HashSet<ProductSupplier>(0);
     
     // ---------- Constructors ----------//
     
@@ -85,21 +83,37 @@ public class Supplier implements Serializable{
      */
     public Supplier(Integer id, String companyName, String phoneNumber,
             String mail, Date createdAt) {
-        this.id = id;
+        this.idSupplier = id;
         this.companyName = companyName;
         this.phoneNumber = phoneNumber;
         this.mail = mail;
         this.createdAt = createdAt;
     }
     
+    
+    
     // -------- Getters && Setters ------//
 
-    public Integer getId() {
-        return id;
+    public Supplier(Integer id, String companyName, String phoneNumber, String mail, Date createdAt,
+			Set<ProductSupplier> productSuppliers) {
+		super();
+		this.idSupplier = id;
+		this.companyName = companyName;
+		this.phoneNumber = phoneNumber;
+		this.mail = mail;
+		this.createdAt = createdAt;
+		this.productSuppliers = productSuppliers;
+	}
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_supplier",unique=true,nullable=false)
+	public Integer getIdSupplier() {
+        return idSupplier;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdSupplier(Integer id) {
+        this.idSupplier = id;
     }
 
     public String getCompanyName() {
@@ -133,14 +147,17 @@ public class Supplier implements Serializable{
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.supplier",cascade=CascadeType.ALL)
+	public Set<ProductSupplier> getProductSuppliers() {
+		return productSuppliers;
+	}
+    
+	public void setProductSuppliers(Set<ProductSupplier> productSuppliers) {
+		this.productSuppliers = productSuppliers;
+	}
 
-    public Set<Product> getStockProducts() {
-        return stockProducts;
-    }
-
-    public void setStockProducts(Set<Product> stockProducts) {
-        this.stockProducts = stockProducts;
-    }
+    
     
     
 }

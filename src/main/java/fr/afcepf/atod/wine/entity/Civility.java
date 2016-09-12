@@ -4,5 +4,5 @@ package fr.afcepf.atod.wine.entity;
  */
 
 public enum Civility {
-    MALE, FEMALE, TRANS;
+    MR, MRS, MISS;
 }

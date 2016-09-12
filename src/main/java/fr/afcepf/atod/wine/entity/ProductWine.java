@@ -136,12 +136,22 @@ public class ProductWine extends Product implements Serializable {
 	public void setApiId(Integer apiId) {
 		this.apiId = apiId;
 	}
+	
+	
+
+	public String getImagesUrl() {
+		return imagesUrl;
+	}
+
+	public void setImagesUrl(String imagesUrl) {
+		this.imagesUrl = imagesUrl;
+	}
 
 	@Override
 	public String toString() {
 		return "ProductWine [appellation=" + appellation + ", productType=" + productType
-				+ ", productVarietal=" + productVarietal + ", id=" + id + ", name=" + name
-				+ ", price=" + price + ", description=" + description + "]";
+				+ ", productVarietal=" + productVarietal + ", id=" + idProduct + ", name=" + name
+				+ ", price=" + price + ", description=" + description + ", Urls=" + imagesUrl + "]";
 	}    
     
     

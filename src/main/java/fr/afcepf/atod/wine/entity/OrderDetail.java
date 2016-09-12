@@ -51,8 +51,8 @@ public class OrderDetail implements Serializable {
      * Product
      */
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProduct", nullable = false)
-    private Product product;
+    @JoinColumn(name = "idProductOrdered", nullable = false)
+    private Product product_ordered;
     
     // ------ Constructors ------- //
 
@@ -70,7 +70,7 @@ public class OrderDetail implements Serializable {
         this.Id = Id;
         this.quantite = quantite;
         this.order = order;
-        this.product = product;
+        this.product_ordered = product;
     }
     
     
@@ -100,12 +100,12 @@ public class OrderDetail implements Serializable {
         this.order = order;
     }
 
-    public Product getProduct() {
-        return product;
+    public Product getProductOrdered() {
+        return product_ordered;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductOrdered(Product product) {
+        this.product_ordered = product;
     }
         
 }

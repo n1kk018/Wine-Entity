@@ -1,6 +1,9 @@
 package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
 import java.util.*;
+
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,8 +26,8 @@ import javax.persistence.Transient;
 /**
  * by roro
  */
-@Table(name = "Product")
 @Entity
+@Table(name = "Product")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Product implements Serializable {
     @Transient
@@ -32,9 +35,7 @@ public class Product implements Serializable {
     /**
      * id
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+    protected Integer idProduct;
 
     /**
      * name
@@ -69,24 +70,13 @@ public class Product implements Serializable {
     /**
      * link order <=> product
      */
-    @OneToMany(mappedBy = "product")
+   
     protected Set<OrderDetail> orderDetails;
-
-
-
+    
     /**
-     * link product <=> stock
+     * suppliers
      */
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "product_supplier",
-               joinColumns = 
-                       {@JoinColumn(name = "id_Product", 
-                               nullable  = false, 
-                               updatable = false)},
-               inverseJoinColumns =
-                       {@JoinColumn(name = "id_Supplier")})
-           
-    protected Set<Supplier> stockSuppliers;
+    private Set<ProductSupplier> productSuppliers = new HashSet<ProductSupplier>(0);
 
     // -------- Constructors ------------ //
     
@@ -103,22 +93,41 @@ public class Product implements Serializable {
      * @param description 
      */
     public Product(Integer id, String name, Double price, String description) {
-        this.id = id;
+        this.idProduct = id;
         this.name = name;
         this.price = price;
         this.description = description;
     }
     
+    
+    
         
     // ------- Getters && Setters ---------//
 
-    public Integer getId() {
-        return id;
+    public Product(Integer id, String name, Double price, String description, Date createdAt,
+			Set<OrderDetail> orderDetails, Set<ProductSupplier> productSuppliers) {
+		super();
+		this.idProduct = id;
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.createdAt = createdAt;
+		this.orderDetails = orderDetails;
+		this.productSuppliers = productSuppliers;
+	}
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_product",unique=true,nullable=false)
+	public Integer getIdProduct() {
+        return idProduct;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdProduct(Integer id) {
+        this.idProduct = id;
     }
+    
+    
 
     public String getName() {
         return name;
@@ -143,7 +152,8 @@ public class Product implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    
+    @OneToMany(mappedBy = "product_ordered",fetch = FetchType.LAZY,cascade=CascadeType.ALL)
     public Set<OrderDetail> getOrderDetails() {
         return orderDetails;
     }
@@ -153,13 +163,7 @@ public class Product implements Serializable {
     }
 
 
-    public Set<Supplier> getStockSuppliers() {
-        return stockSuppliers;
-    }
-
-    public void setStockSuppliers(Set<Supplier> stockSuppliers) {
-        this.stockSuppliers = stockSuppliers;
-    }
+   
         
     public Date getCreatedAt() {
 		return createdAt;
@@ -167,9 +171,18 @@ public class Product implements Serializable {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.product",cascade=CascadeType.ALL)
+	public Set<ProductSupplier> getProductSuppliers() {
+		return productSuppliers;
+	}
+	
+	public void setProductSuppliers(Set<ProductSupplier> productSuppliers) {
+		this.productSuppliers = productSuppliers;
+	}
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + "]";
+		return "Product [id=" + idProduct + ", name=" + name + ", price=" + price + ", description=" + description + "]";
 	}    
 	
 	
