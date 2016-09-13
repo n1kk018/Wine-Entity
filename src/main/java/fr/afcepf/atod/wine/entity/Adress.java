@@ -51,7 +51,7 @@ public class Adress implements Serializable {
     /**
      * billing
      */
-     @Column(name    = "billing",
+     @Column(name    = "billing", columnDefinition = "tinyInt(1)",
             nullable = false)
     private boolean billing;
 
