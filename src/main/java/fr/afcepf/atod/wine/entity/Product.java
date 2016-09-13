@@ -56,9 +56,7 @@ public class Product implements Serializable {
 
 	/**
 	 * created at
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "createdAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+	 **/
 	private Date createdAt;
 
 	protected SpecialEvent speEvent;
@@ -176,7 +174,9 @@ public class Product implements Serializable {
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "createdAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	public Date getCreatedAt() {
 		return createdAt;
 	}
