@@ -22,6 +22,7 @@ public class ProductSupplier  implements Serializable {
 	private ProductSupplierId pk = new ProductSupplierId();
 	private Integer quantity;
 	
+	
 	@EmbeddedId
 	public ProductSupplierId getPk() {
 		return pk;

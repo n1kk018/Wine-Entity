@@ -46,22 +46,16 @@ public class ProductWine extends Product implements Serializable {
     /**
      * product type
      */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProductType", nullable = true)
     private ProductType productType;
     
     /**
      * product vintage
      */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProductVintage", nullable = true)
     private ProductVintage productVintage;
 
     /**
      * varietal
      */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProductVarietal", nullable = true)
     private ProductVarietal productVarietal;
 
     // --------- Constructors ---------- //
@@ -104,7 +98,9 @@ public class ProductWine extends Product implements Serializable {
     public void setAppellation(String appellation) {
         this.appellation = appellation;
     }
-
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idProductType", nullable = true)
     public ProductType getProductType() {
         return productType;
     }
@@ -112,7 +108,9 @@ public class ProductWine extends Product implements Serializable {
     public void setProductType(ProductType productType) {
         this.productType = productType;
     }
-
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idProductVarietal", nullable = true)
     public ProductVarietal getProductVarietal() {
         return productVarietal;
     }
@@ -121,6 +119,8 @@ public class ProductWine extends Product implements Serializable {
         this.productVarietal = productVarietal;
     }
     
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idProductVintage", nullable = true)
 	public ProductVintage getProductVintage() {
 		return productVintage;
 	}
