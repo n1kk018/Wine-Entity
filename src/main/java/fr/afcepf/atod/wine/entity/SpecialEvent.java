@@ -73,7 +73,7 @@ public class SpecialEvent implements Serializable {
 	@JoinColumn(name = "idAdmin", nullable = false)
 	private Admin admin;
 
-	@Column(name = "taux de reduction", nullable = false)
+	@Column(name = "txreduction", nullable = false)
 	private Integer pourcentage;
 
 	@OneToMany(mappedBy = "speEvent")
