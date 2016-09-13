@@ -1,6 +1,9 @@
 package fr.afcepf.atod.wine.entity;
+
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,161 +22,189 @@ import javax.persistence.Transient;
 @Table(name = "SpecialEvent")
 @Entity
 public class SpecialEvent implements Serializable {
-    @Transient
-    private static final int MAX_SIZE = 50;
-    /**
-     * id
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Transient
+	private static final int MAX_SIZE = 50;
+	/**
+	 * id
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    /**
-     *  title
-     */
-    @Column(name        = "Title", 
-            length      = MAX_SIZE, 
-            nullable    = false)
-    private String title;
+	/**
+	 * title
+	 */
+	@Column(name = "Title", length = MAX_SIZE, nullable = false)
+	private String title;
 
-    /**
-     * begining event
-     */
-    @Column(name     = "startDate", 
-            nullable = false)
-    private Date startDate;
+	/**
+	 * begining event
+	 */
+	@Column(name = "startDate", nullable = false)
+	private Date startDate;
 
-    /**
-     * end event
-     */
-    @Column(name     = "endDate", 
-            nullable = false)
-    private Date endDate;
+	/**
+	 * end event
+	 */
+	@Column(name = "endDate", nullable = false)
+	private Date endDate;
 
-    /**
-     * event: created @
-     */
-    @Column(name     = "createdDate", 
-            nullable = false)
-    private Date createdAt;
+	/**
+	 * event: created @
+	 */
+	@Column(name = "createdDate", nullable = false)
+	private Date createdAt;
 
-    /**
-     * 
-     */
-    @Column(name     = "description",
-            length   = MAX_SIZE*3,
-            nullable = false)
-    private String description;
+	/**
+	 * 
+	 */
+	@Column(name = "description", length = MAX_SIZE * 3, nullable = false)
+	private String description;
 
-    /**
-     * 
-     */
-    @Column(name     = "activated", 
-            nullable = false)
-    private Boolean activated;
-    /**
-     *   admin  
-     */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idAdmin", nullable = false)
-    private Admin admin;
-    
-    // ------- constructeurs -------//
-    
-    /**
-     * Default constructor
-     */
-    public SpecialEvent() {
-    }
-    /**
-     * 
-     * @param id
-     * @param Title
-     * @param startDate
-     * @param endDate
-     * @param createdAt
-     * @param description
-     * @param activated
-     * @param admin 
-     */
-    public SpecialEvent(Integer id, String Title, Date startDate, 
-                        Date endDate, Date createdAt, String description,
-                        Boolean activated, Admin admin) {
-        this.id = id;
-        this.title = Title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.createdAt = createdAt;
-        this.description = description;
-        this.activated = activated;
-        this.admin = admin;
-    }
-    
-    
+	/**
+	 * 
+	 */
+	@Column(name = "activated", nullable = false)
+	private Boolean activated;
+	/**
+	 * admin
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idAdmin", nullable = false)
+	private Admin admin;
 
-    // ------- Getters et setters -------//
+	@Column(name = "taux de reduction", nullable = false)
+	private Integer pourcentage;
 
-    public Integer getId() {
-        return id;
-    }
+	@OneToMany(mappedBy = "speEvent")
+	private Set<Product> products;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	// ------- constructeurs -------//
 
-    public String getTitle() {
-        return title;
-    }
+	/**
+	 * Default constructor
+	 */
+	public SpecialEvent() {
+	}
 
-    public void setTitle(String Title) {
-        this.title = Title;
-    }
+	/**
+	 * 
+	 * @param id
+	 * @param Title
+	 * @param startDate
+	 * @param endDate
+	 * @param createdAt
+	 * @param description
+	 * @param activated
+	 * @param admin
+	 */
+	public SpecialEvent(Integer id, String title, Date startDate, Date endDate, Date createdAt, String description,
+			Boolean activated, Admin admin, Integer pourcentage) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.createdAt = createdAt;
+		this.description = description;
+		this.activated = activated;
+		this.admin = admin;
+		this.pourcentage = pourcentage;
+	}
 
-    public Date getStartDate() {
-        return startDate;
-    }
+	public SpecialEvent(Integer id, String title, Date startDate, Date endDate, Date createdAt, String description,
+			Boolean activated, Admin admin, Integer pourcentage, Set<Product> products) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.createdAt = createdAt;
+		this.description = description;
+		this.activated = activated;
+		this.admin = admin;
+		this.pourcentage = pourcentage;
+		this.products = products;
+	}
+	// ------- Getters et setters -------//
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Date getEndDate() {
-        return endDate;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+	public Integer getPourcentage() {
+		return pourcentage;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public void setPourcentage(Integer pourcentage) {
+		this.pourcentage = pourcentage;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public Set<Product> getProducts() {
+		return products;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public Boolean getActivated() {
-        return activated;
-    }
+	public void setTitle(String Title) {
+		this.title = Title;
+	}
 
-    public void setActivated(Boolean activated) {
-        this.activated = activated;
-    }
+	public Date getStartDate() {
+		return startDate;
+	}
 
-    public Admin getAdmin() {
-        return admin;
-    }
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Boolean getActivated() {
+		return activated;
+	}
+
+	public void setActivated(Boolean activated) {
+		this.activated = activated;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
 }
