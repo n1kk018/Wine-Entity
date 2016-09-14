@@ -48,7 +48,7 @@ public class Customer extends User implements Serializable {
      * @param activated 
      */
     
-    @Column(name = "activated", columnDefinition = "tinyInt(1)" ,nullable = false)
+    @Column(name = "activated", columnDefinition = "tinyInt(1) default '0'" ,nullable = false)
 	private Boolean activated;
     
     
