@@ -49,8 +49,7 @@ public class Comment implements Serializable {
     /**
      * validated comment?
      */
-    @Column(name     = "isValidated",
-            nullable = false)
+    @Column(name     = "isValidated", columnDefinition = "tinyInt(1)", nullable = false)
     private Boolean isValidated;
 
     /**

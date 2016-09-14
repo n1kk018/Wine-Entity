@@ -64,7 +64,7 @@ public class SpecialEvent implements Serializable {
 	/**
 	 * 
 	 */
-	@Column(name = "activated", nullable = false)
+	@Column(name = "activated", columnDefinition = "tinyInt(1)" ,nullable = false)
 	private Boolean activated;
 	/**
 	 * admin

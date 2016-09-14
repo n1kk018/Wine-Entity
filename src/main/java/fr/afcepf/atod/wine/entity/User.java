@@ -118,6 +118,7 @@ public class User implements Serializable {
     @JoinColumn(name = "idAdresse", nullable = false)
     protected  Adress adress;
     
+    
     /**
      * Default constructor
      */
@@ -250,6 +251,7 @@ public class User implements Serializable {
 
     public void setAdress(Adress adress) {
         this.adress = adress;
-    }
+    }    
+    
             
 }
