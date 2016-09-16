@@ -36,14 +36,6 @@ public class ProductWine extends Product implements Serializable {
     private Integer apiId;
     
     /**
-     * imagesUrl
-     */
-    @Column(name     = "imagesUrl",
-            length   = 1024,
-            nullable = true)
-    private String imagesUrl;
-
-    /**
      * product type
      */
     private ProductType productType;
@@ -137,21 +129,12 @@ public class ProductWine extends Product implements Serializable {
 		this.apiId = apiId;
 	}
 	
-	
-
-	public String getImagesUrl() {
-		return imagesUrl;
-	}
-
-	public void setImagesUrl(String imagesUrl) {
-		this.imagesUrl = imagesUrl;
-	}
 
 	@Override
 	public String toString() {
 		return "ProductWine [appellation=" + appellation + ", productType=" + productType
 				+ ", productVarietal=" + productVarietal + ", id=" + idProduct + ", name=" + name
-				+ ", price=" + price + ", description=" + description + ", Urls=" + imagesUrl + "]";
+				+ ", price=" + price + ", description=" + description + "]";
 	}    
     
     
