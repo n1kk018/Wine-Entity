@@ -53,6 +53,14 @@ public class Product implements Serializable {
 	 */
 	@Column(name = "description", length = MAX_SIZE * 4, nullable = false)
 	protected String description;
+	
+	/**
+     * imagesUrl
+     */
+    @Column(name     = "Images",
+            length   = 1024,
+            nullable = true)
+    private String images;
 
 	/**
 	 * created at
@@ -192,6 +200,14 @@ public class Product implements Serializable {
 
 	public void setProductSuppliers(Set<ProductSupplier> productSuppliers) {
 		this.productSuppliers = productSuppliers;
+	}
+	
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String imagesUrl) {
+		this.images = imagesUrl;
 	}
 
 	@Override
