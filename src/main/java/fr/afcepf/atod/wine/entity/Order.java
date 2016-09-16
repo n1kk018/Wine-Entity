@@ -37,7 +37,7 @@ public class Order implements Serializable {
      * paid at
      */
     @Column(name     = "paidAt",
-            nullable = false)
+            nullable = true)
     private Date paidAt;
 
     
