@@ -52,7 +52,7 @@ public class Adress implements Serializable {
      * billing
      */
      @Column(name    = "billing", columnDefinition = "tinyInt(1) default'0'",
-            nullable = false)
+            nullable = true)
     private boolean billing;
 
     /**
