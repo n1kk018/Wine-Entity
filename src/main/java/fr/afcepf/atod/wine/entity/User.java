@@ -94,14 +94,14 @@ public class User implements Serializable {
     /**
      * user account created @
      */
-     @Column(name     = "createdAt", columnDefinition = "DATE DEFAULT CURRENT_DATE",
+     @Column(name     = "createdAt",
             nullable  = false)
     protected  Date createdAt;
 
     /**
      * user account updated @
      */
-     @Column(name       = "updatedAt", columnDefinition = "DATE DEFAULT CURRENT_DATE",
+     @Column(name       = "updatedAt",
              nullable   = true)
     protected  Date updatedAt;
    
