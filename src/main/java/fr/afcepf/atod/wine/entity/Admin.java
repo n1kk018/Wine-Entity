@@ -1,20 +1,31 @@
 package fr.afcepf.atod.wine.entity;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 /**
- * by roro
+ * 
+ * @author stagiaire
+ *
  */
 @Entity
+@DiscriminatorValue(value = "ADMIN")
 public class Admin extends User implements Serializable {
 
    
     /**
-     * bi directionnalite
+	 * serial.
+	 */
+	private static final long serialVersionUID = 3958693263738816120L;
+
+	/**
+     * bi directionnalite.
      */
-    @OneToMany(mappedBy = "admin")      
+    @OneToMany(mappedBy = "admin")
     private Set<SpecialEvent> events;
 
     /**

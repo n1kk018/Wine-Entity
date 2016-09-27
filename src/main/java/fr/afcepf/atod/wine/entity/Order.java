@@ -1,6 +1,9 @@
 package fr.afcepf.atod.wine.entity;
+
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  * by roro
@@ -19,132 +21,140 @@ import javax.persistence.Transient;
 @Table(name = "Ordering")
 @Entity
 public class Order implements Serializable {
-    /**
-     * id
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1192893252389460956L;
 
-    /**
-     * created at
-     */
-    @Column(name     = "createdAt",
-            nullable = false)
-    private Date createdAt;
+	/**
+	 * id
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    /**
-     * paid at
-     */
-    @Column(name     = "paidAt",
-            nullable = true)
-    private Date paidAt;
+	/**
+	 * created at
+	 */
+	@Column(name = "createdAt", nullable = false)
+	private Date createdAt;
 
-    
-    /**
-     * shipping method
-     */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idShippingMethod", nullable = false)
-    private ShippingMethod shippingMethod;
+	/**
+	 * paid at
+	 */
+	@Column(name = "paidAt", nullable = true)
+	private Date paidAt;
 
-    /**
-     * customer
-     */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCustomer", nullable = false)
-    private Customer customer;
+	/**
+	 * shipping method
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idShippingMethod", nullable = false)
+	private ShippingMethod shippingMethod;
 
-    /**
-     * payment info
-     */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPaymentInfo",nullable = false)
-    private PaymentInfo paymentInfo;
-    
-    /**
-     * details
-     */
-    @OneToMany(mappedBy = "order")
-    private  Set<OrderDetail> ordersDetail;
+	/**
+	 * customer
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idCustomer", nullable = false)
+	private Customer customer;
 
-    
-    // ------------ Constructors  ----------------// 
+	/**
+	 * payment info
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idPaymentInfo", nullable = false)
+	private PaymentInfo paymentInfo;
 
-     /**
-     * Default constructor
-     */
-    public Order() {
-    }
+	/**
+	 * details
+	 */
+	@OneToMany(mappedBy = "order")
+	private Set<OrderDetail> ordersDetail;
 
-    public Order(Integer id, Date createdAt, Date paidAt,
-            ShippingMethod shippingMethod, Customer customer,
-            PaymentInfo paymentInfo) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.paidAt = paidAt;
-        this.shippingMethod = shippingMethod;
-        this.customer = customer;
-        this.paymentInfo = paymentInfo;
-    }
-    
-    
-    // ----------- Getters && Setters -----------//
+	// ------------ Constructors ----------------//
 
-    public Integer getId() {
-        return id;
-    }
+	/**
+	 * Default constructor
+	 */
+	public Order() {
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	/**
+	 * constructeur surcharge.
+	 * @param id
+	 * @param createdAt
+	 * @param paidAt
+	 * @param shippingMethod
+	 * @param customer
+	 * @param paymentInfo
+	 */
+	public Order(Integer id, Date createdAt, Date paidAt, ShippingMethod shippingMethod, Customer customer,
+			PaymentInfo paymentInfo) {
+		this.id = id;
+		this.createdAt = createdAt;
+		this.paidAt = paidAt;
+		this.shippingMethod = shippingMethod;
+		this.customer = customer;
+		this.paymentInfo = paymentInfo;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	// ----------- Getters && Setters -----------//
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Date getPaidAt() {
-        return paidAt;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setPaidAt(Date paidAt) {
-        this.paidAt = paidAt;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public ShippingMethod getShippingMethod() {
-        return shippingMethod;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setShippingMethod(ShippingMethod shippingMethod) {
-        this.shippingMethod = shippingMethod;
-    }
+	public Date getPaidAt() {
+		return paidAt;
+	}
 
-    public Customer getCustomer() {
-        return customer;
-    }
+	public void setPaidAt(Date paidAt) {
+		this.paidAt = paidAt;
+	}
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+	public ShippingMethod getShippingMethod() {
+		return shippingMethod;
+	}
 
-    public PaymentInfo getPaymentInfo() {
-        return paymentInfo;
-    }
+	public void setShippingMethod(ShippingMethod shippingMethod) {
+		this.shippingMethod = shippingMethod;
+	}
 
-    public void setPaymentInfo(PaymentInfo paymentInfo) {
-        this.paymentInfo = paymentInfo;
-    }
+	public Customer getCustomer() {
+		return customer;
+	}
 
-    public Set<OrderDetail> getOrdersDetail() {
-        return ordersDetail;
-    }
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
-    public void setOrdersDetail(Set<OrderDetail> ordersDetail) {
-        this.ordersDetail = ordersDetail;
-    }
-    
+	public PaymentInfo getPaymentInfo() {
+		return paymentInfo;
+	}
+
+	public void setPaymentInfo(PaymentInfo paymentInfo) {
+		this.paymentInfo = paymentInfo;
+	}
+
+	public Set<OrderDetail> getOrdersDetail() {
+		return ordersDetail;
+	}
+
+	public void setOrdersDetail(Set<OrderDetail> ordersDetail) {
+		this.ordersDetail = ordersDetail;
+	}
+
 }

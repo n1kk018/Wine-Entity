@@ -22,6 +22,10 @@ import javax.persistence.Transient;
 @Table(name = "SpecialEvent")
 @Entity
 public class SpecialEvent implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7282285471554240369L;
 	@Transient
 	private static final int MAX_SIZE = 50;
 	/**
@@ -64,7 +68,7 @@ public class SpecialEvent implements Serializable {
 	/**
 	 * 
 	 */
-	@Column(name = "activated", columnDefinition = "tinyInt(1)" ,nullable = false)
+	@Column(name = "activated", columnDefinition = "tinyInt(1)", nullable = false)
 	private Boolean activated;
 	/**
 	 * admin
@@ -112,6 +116,19 @@ public class SpecialEvent implements Serializable {
 		this.pourcentage = pourcentage;
 	}
 
+	/**
+	 * constructeur surcharge.
+	 * @param id
+	 * @param title
+	 * @param startDate
+	 * @param endDate
+	 * @param createdAt
+	 * @param description
+	 * @param activated
+	 * @param admin
+	 * @param pourcentage
+	 * @param products
+	 */
 	public SpecialEvent(Integer id, String title, Date startDate, Date endDate, Date createdAt, String description,
 			Boolean activated, Admin admin, Integer pourcentage, Set<Product> products) {
 		super();
@@ -156,8 +173,8 @@ public class SpecialEvent implements Serializable {
 		return title;
 	}
 
-	public void setTitle(String Title) {
-		this.title = Title;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Date getStartDate() {

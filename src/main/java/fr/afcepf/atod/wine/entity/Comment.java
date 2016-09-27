@@ -19,6 +19,10 @@ import javax.persistence.Transient;
 @Entity
 public class Comment implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2128973092242932788L;
+	/**
      * use to calculate max size column
      */
     @Transient
@@ -42,7 +46,7 @@ public class Comment implements Serializable {
      * text
      */
     @Column(name     = "text",
-            length   = MAX_SIZE*4,
+            length   = MAX_SIZE * 4,
             nullable = false)
     private String text;
 

@@ -19,7 +19,12 @@ import javax.persistence.Transient;
 @Table(name = "Newsletter")
 @Entity
 public class Newsletter implements Serializable {
-    @Transient
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4667613299324225277L;
+
+	@Transient
     private static final int MAX_SIZE = 50;
 
     /**
@@ -41,7 +46,7 @@ public class Newsletter implements Serializable {
      * body
      */
     @Column(name     = "body",
-            length   = 4*MAX_SIZE,
+            length   = 4 * MAX_SIZE,
             nullable = false)
     private String body;
 
@@ -56,14 +61,14 @@ public class Newsletter implements Serializable {
      * newsletter update @t
      */
     @Column(name     = "updateAt",            
-            nullable = false)
+            nullable = true)
     private Date updatedAt;
 
     /**
      * newsletter published @t
      */
     @Column(name     = "publishedAt",            
-            nullable = false)
+            nullable = true)
     private Date publishedAt;
     
     /**

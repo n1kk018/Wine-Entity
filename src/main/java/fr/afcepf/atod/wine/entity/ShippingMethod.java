@@ -1,4 +1,5 @@
 package fr.afcepf.atod.wine.entity;
+import java.io.Serializable;
 import java.util.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +15,13 @@ import javax.persistence.Transient;
  */
 @Table(name = "ShippingMethod")
 @Entity
-public class ShippingMethod {
-    @Transient
+public class ShippingMethod implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1601454139934634147L;
+
+	@Transient
     private static final int MAX_SIZE = 50;   
 
     /**
@@ -29,7 +35,7 @@ public class ShippingMethod {
      * information
      */
     @Column(name     = "information",
-            length   = 4*MAX_SIZE,
+            length   = 4 * MAX_SIZE,
             nullable = false)
     private String information;
     

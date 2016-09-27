@@ -21,6 +21,11 @@ import javax.persistence.Transient;
 @Table(name = "City")
 public class City implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5333848154446014877L;
+
+	/**
      * max size columns
      */
     @Transient

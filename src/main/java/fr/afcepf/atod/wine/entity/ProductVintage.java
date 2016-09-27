@@ -17,6 +17,11 @@ import javax.persistence.Transient;
 @Entity
 public class ProductVintage implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3355158186494453322L;
+
+	/**
      * columns size
      */
     @Transient
