@@ -4,6 +4,11 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 public class ProductSupplierId implements java.io.Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2270768819235986612L;
 	private Product product;
 	private Supplier supplier;
 	

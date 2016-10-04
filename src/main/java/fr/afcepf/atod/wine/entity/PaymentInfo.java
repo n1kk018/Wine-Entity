@@ -17,7 +17,12 @@ import javax.persistence.Transient;
 @Entity
 public class PaymentInfo implements Serializable {
 
-    @Transient
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3055660563477948508L;
+
+	@Transient
     private static final int MAX_SIZE = 50;
 
     /**
@@ -31,7 +36,7 @@ public class PaymentInfo implements Serializable {
      * payment method
      */
     @Column(name     = "paymentMethod",
-            length   = MAX_SIZE*4,
+            length   = MAX_SIZE * 4,
             nullable = false)
     private String paymentMethod;
 

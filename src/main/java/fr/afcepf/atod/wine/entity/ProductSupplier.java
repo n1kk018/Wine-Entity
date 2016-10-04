@@ -18,6 +18,10 @@ import javax.persistence.Transient;
 	@AssociationOverride(name = "pk.supplier", joinColumns = @JoinColumn(name = "id_supplier")) 
 	})
 public class ProductSupplier  implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8907562170034527300L;
 	
 	private ProductSupplierId pk = new ProductSupplierId();
 	private Integer quantity;

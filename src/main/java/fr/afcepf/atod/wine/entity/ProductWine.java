@@ -1,10 +1,10 @@
 package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
-import java.util.*;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
@@ -13,12 +13,21 @@ import javax.persistence.Transient;
  * by roro
  */
 @Entity
+@DiscriminatorValue(value = "WINE")
 public class ProductWine extends Product implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6564936265772956143L;
+
+	/**
      * size columns
      */
     @Transient
     private static final int MAX_SIZE = 50;
+    
+    @Transient
+	private static final int MAX_SIZE_PIC = 1024;
   
     /**
      * appellation
@@ -34,15 +43,13 @@ public class ProductWine extends Product implements Serializable {
     @Column(name     = "apiId",
             nullable = true)
     private Integer apiId;
-    
     /**
      * imagesUrl
      */
     @Column(name     = "imagesUrl",
-            length   = 1024,
+            length   = MAX_SIZE_PIC,
             nullable = true)
     private String imagesUrl;
-
     /**
      * product type
      */
@@ -137,8 +144,6 @@ public class ProductWine extends Product implements Serializable {
 		this.apiId = apiId;
 	}
 	
-	
-
 	public String getImagesUrl() {
 		return imagesUrl;
 	}

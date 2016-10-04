@@ -1,4 +1,5 @@
 package fr.afcepf.atod.wine.entity;
+
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.CascadeType;
@@ -19,120 +20,127 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "Adress")
 public class Adress implements Serializable {
-    /**
-     * size max columns
-     */
-    @Transient
-   private static final int MAX_SIZE = 50;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -172263256055543724L;
 
-    /**
-     * id
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	/**
+	 * size max columns
+	 */
+	@Transient
+	private static final int MAX_SIZE = 50;
 
-    /**
-     * street
-     */
-    @Column(name       = "street",
-            length     = MAX_SIZE*2,
-            nullable   = false)
-    private String street;
+	/**
+	 * id
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    /**
-     * number
-     */
-    @Column(name     = "number",
-            length   = MAX_SIZE,
-            nullable = false)
-    private String number;
+	/**
+	 * street
+	 */
+	@Column(name = "street", length = MAX_SIZE * 2, nullable = true)
+	private String street;
 
-    /**
-     * billing
-     */
-     @Column(name    = "billing", columnDefinition = "tinyInt(1)",
-            nullable = false)
-    private boolean billing;
+	/**
+	 * number
+	 */
+	@Column(name = "number", length = MAX_SIZE, nullable = true)
+	private String number;
 
-    /**
-     * city
-     */
-     @ManyToOne(cascade = CascadeType.ALL)
-     @JoinColumn(name = "idCity", nullable = false)
-    private City city;
-    
-     /**
-      * users
-      */
-     @OneToMany(mappedBy = "adress")
-     private Set<User> users;
-     
-     // ---------- constructors ----------- //
-     
-     /**
-     * Default constructor
-     */
-    public Adress() {
-    }
+	/**
+	 * billing
+	 */
+	@Column(name = "billing", columnDefinition = "tinyInt(1) default'0'", nullable = true)
+	private boolean billing;
 
-    public Adress(Integer id, String street, String number,
-                  boolean billing, City city) {
-        this.id = id;
-        this.street = street;
-        this.number = number;
-        this.billing = billing;
-        this.city = city;
-    }
-        
-    // ------------ getters && setters -------- //
+	/**
+	 * city
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idCity", nullable = false)
+	private City city;
 
-    public Integer getId() {
-        return id;
-    }
+	/**
+	 * users
+	 */
+	@OneToMany(mappedBy = "adress")
+	private Set<User> users;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	// ---------- constructors ----------- //
 
-    public String getStreet() {
-        return street;
-    }
+	/**
+	 * Default constructor
+	 */
+	public Adress() {
+	}
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
+	/**
+	 * constructeur surcharge.
+	 * @param id
+	 * @param street
+	 * @param number
+	 * @param billing
+	 * @param city
+	 */
+	public Adress(Integer id, String street, String number, boolean billing, City city) {
+		this.id = id;
+		this.street = street;
+		this.number = number;
+		this.billing = billing;
+		this.city = city;
+	}
 
-    public String getNumber() {
-        return number;
-    }
+	// ------------ getters && setters -------- //
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public boolean isBilling() {
-        return billing;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setBilling(boolean billing) {
-        this.billing = billing;
-    }
+	public String getStreet() {
+		return street;
+	}
 
-    public City getCity() {
-        return city;
-    }
+	public void setStreet(String street) {
+		this.street = street;
+	}
 
-    public void setCity(City city) {
-        this.city = city;
-    }
+	public String getNumber() {
+		return number;
+	}
 
-    public Set<User> getUsers() {
-        return users;
-    }
+	public void setNumber(String number) {
+		this.number = number;
+	}
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }    
-    
+	public boolean isBilling() {
+		return billing;
+	}
+
+	public void setBilling(boolean billing) {
+		this.billing = billing;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
 }

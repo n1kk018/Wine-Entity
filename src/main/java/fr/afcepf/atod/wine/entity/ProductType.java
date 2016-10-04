@@ -17,6 +17,11 @@ import javax.persistence.Transient;
 @Entity
 public class ProductType implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8059204348949111671L;
+
+	/**
      * columns size
      */
     @Transient
@@ -33,7 +38,7 @@ public class ProductType implements Serializable {
      * type
      */
     @Column(name     = "type",
-            length   = MAX_SIZE*2,
+            length   = MAX_SIZE * 2,
             nullable = false)
     private String type;
     

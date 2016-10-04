@@ -17,6 +17,10 @@ import javax.persistence.Transient;
 @Entity
 public class Country implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -473519643276156347L;
+	/**
      * size columns
      */
     @Transient

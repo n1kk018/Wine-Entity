@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,8 +24,13 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "User")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_type")
 public class User implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5971341706742150980L;
+	/**
      * size columns
      */
     @Transient
@@ -63,7 +69,7 @@ public class User implements Serializable {
      * email
      */
     @Column(name     = "mail",
-            length   = MAX_SIZE*2,
+            length   = MAX_SIZE * 2,
             nullable = false)
     protected  String mail;
 
@@ -102,7 +108,7 @@ public class User implements Serializable {
      * user account updated @
      */
      @Column(name       = "updatedAt",
-             nullable   = false)
+             nullable   = true)
     protected  Date updatedAt;
    
     /**
@@ -117,7 +123,11 @@ public class User implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idAdresse", nullable = false)
     protected  Adress adress;
-    
+    /**
+     * user_type
+     */
+    @Column(insertable = false, updatable = false, name = "user_type", length = MAX_SIZE)
+	protected String user_type;
     
     /**
      * Default constructor
@@ -157,11 +167,18 @@ public class User implements Serializable {
     }
     // --------- getters && setters ------------ //
 
+    public String getUser_type() {
+		return user_type;
+	}
+	public void setUser_type(String userType) {
+		this.user_type = userType;
+	}
+	
     public Integer getId() {
         return id;
     }
-
-    public void setId(Integer id) {
+    
+	public void setId(Integer id) {
         this.id = id;
     }
 

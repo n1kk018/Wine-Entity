@@ -17,6 +17,10 @@ import javax.persistence.Transient;
 @Entity
 public class ProductVarietal implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 544340355216822403L;
+	/**
      * columns
      */
     @Transient
@@ -32,7 +36,7 @@ public class ProductVarietal implements Serializable {
      * description
      */
     @Column(name     = "description",
-            length   = MAX_SIZE*2,
+            length   = MAX_SIZE * 2,
             nullable = false)
     private String description;
     

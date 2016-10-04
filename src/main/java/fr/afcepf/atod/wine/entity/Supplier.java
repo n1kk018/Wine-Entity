@@ -20,6 +20,11 @@ import javax.persistence.Transient;
 @Table(name = "Supplier")
 public class Supplier implements Serializable{
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8712013523204860481L;
+
+	/**
      * size columns
      */
     @Transient
@@ -34,7 +39,7 @@ public class Supplier implements Serializable{
      * name
      */
     @Column(name     = "companyName",
-            length   = MAX_SIZE*2,
+            length   = MAX_SIZE * 2,
             nullable =  false)
     private String companyName;
 
@@ -89,11 +94,15 @@ public class Supplier implements Serializable{
         this.mail = mail;
         this.createdAt = createdAt;
     }
-    
-    
-    
-    // -------- Getters && Setters ------//
-
+    /**
+     * constructeur surcharge.
+     * @param id
+     * @param companyName
+     * @param phoneNumber
+     * @param mail
+     * @param createdAt
+     * @param productSuppliers
+     */
     public Supplier(Integer id, String companyName, String phoneNumber, String mail, Date createdAt,
 			Set<ProductSupplier> productSuppliers) {
 		super();
@@ -105,9 +114,11 @@ public class Supplier implements Serializable{
 		this.productSuppliers = productSuppliers;
 	}
     
+    // -------- Getters && Setters ------//
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_supplier",unique=true,nullable=false)
+    @Column(name = "id_supplier",unique = true, nullable = false)
 	public Integer getIdSupplier() {
         return idSupplier;
     }
@@ -148,7 +159,7 @@ public class Supplier implements Serializable{
         this.createdAt = createdAt;
     }
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.supplier",cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.supplier",cascade = CascadeType.ALL)
 	public Set<ProductSupplier> getProductSuppliers() {
 		return productSuppliers;
 	}

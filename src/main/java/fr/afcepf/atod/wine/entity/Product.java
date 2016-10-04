@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,9 +29,17 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "Product")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "typeProduct")
 public class Product implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1084257720250486898L;
 	@Transient
 	private static final int MAX_SIZE = 50;
+
+	@Transient
+	private static final int MAX_SIZE_PIC = 1024;
 	/**
 	 * id
 	 */
@@ -55,9 +64,20 @@ public class Product implements Serializable {
 	protected String description;
 
 	/**
+	 * imagesUrl
+	 */
+	@Column(name = "Images", length = MAX_SIZE_PIC, nullable = true)
+	private String images;
+
+	/**
 	 * created at
 	 **/
 	private Date createdAt;
+	/**
+	 * product_type
+	 */
+	@Column(insertable = false, updatable = false, name = "typeProduct", length = MAX_SIZE, nullable = false)
+	protected String typeProduct;
 
 	protected SpecialEvent speEvent;
 
@@ -94,6 +114,16 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
+	/**
+	 * constructeur surcharge.
+	 * @param id
+	 * @param name
+	 * @param price
+	 * @param description
+	 * @param createdAt
+	 * @param orderDetails
+	 * @param productSuppliers
+	 */
 	public Product(Integer id, String name, Double price, String description, Date createdAt,
 			Set<OrderDetail> orderDetails, Set<ProductSupplier> productSuppliers) {
 		super();
@@ -106,6 +136,18 @@ public class Product implements Serializable {
 		this.productSuppliers = productSuppliers;
 	}
 
+	/**
+	 * constructeur surcharge.
+	 * 
+	 * @param idProduct
+	 * @param name
+	 * @param price
+	 * @param description
+	 * @param createdAt
+	 * @param speEvent
+	 * @param orderDetails
+	 * @param productSuppliers
+	 */
 	public Product(Integer idProduct, String name, Double price, String description, Date createdAt,
 			SpecialEvent speEvent, Set<OrderDetail> orderDetails, Set<ProductSupplier> productSuppliers) {
 		super();
@@ -121,12 +163,16 @@ public class Product implements Serializable {
 
 	// ------- Getters && Setters ---------//
 
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_product", unique = true, nullable = false)
 	public Integer getIdProduct() {
 		return idProduct;
 	}
+
+
 
 	public void setIdProduct(Integer id) {
 		this.idProduct = id;
@@ -174,7 +220,7 @@ public class Product implements Serializable {
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "createdAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	public Date getCreatedAt() {
@@ -192,6 +238,14 @@ public class Product implements Serializable {
 
 	public void setProductSuppliers(Set<ProductSupplier> productSuppliers) {
 		this.productSuppliers = productSuppliers;
+	}
+
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String imagesUrl) {
+		this.images = imagesUrl;
 	}
 
 	@Override
