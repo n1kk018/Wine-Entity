@@ -18,6 +18,11 @@
             <version>${javaee.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>de.malkusch.localized</groupId>
+            <artifactId>localized</artifactId>
+            <version>0.2.8</version>
+        </dependency>
     </dependencies>
         
     <build>

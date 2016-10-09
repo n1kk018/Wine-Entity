@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import de.malkusch.localized.Localized;
+
 /**
  * by roro
  */
@@ -38,8 +40,8 @@ public class ProductType implements Serializable {
      * type
      */
     @Column(name     = "type",
-            length   = MAX_SIZE * 2,
-            nullable = false)
+            length   = MAX_SIZE * 2)
+    @Localized
     private String type;
     
     /**
