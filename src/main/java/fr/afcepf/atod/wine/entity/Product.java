@@ -98,7 +98,7 @@ public class Product implements Serializable {
 	 /**
      * product features
      */
-    private Set<ProductFeature> features;
+    private Set<ProductFeature> features = new HashSet<ProductFeature>(0);;
 
 	// -------- Constructors ------------ //
 
@@ -175,7 +175,7 @@ public class Product implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_product", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer getIdProduct() {
 		return id;
 	}
