@@ -1,13 +1,19 @@
 package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+
+import de.malkusch.localized.Localized;
 
 /**
  * by roro
@@ -35,6 +41,7 @@ public class ProductWine extends Product implements Serializable {
     @Column(name     = "appellation",
             length   = MAX_SIZE,
             nullable = true)
+    @Localized
     private String appellation;
     
     /**
@@ -59,7 +66,7 @@ public class ProductWine extends Product implements Serializable {
      * product vintage
      */
     private ProductVintage productVintage;
-
+    
     /**
      * varietal
      */
@@ -135,8 +142,8 @@ public class ProductWine extends Product implements Serializable {
 	public void setProductVintage(ProductVintage productVintage) {
 		this.productVintage = productVintage;
 	}
-    
-	public Integer getApiId() {
+	  
+    public Integer getApiId() {
 		return apiId;
 	}
 
@@ -155,7 +162,7 @@ public class ProductWine extends Product implements Serializable {
 	@Override
 	public String toString() {
 		return "ProductWine [appellation=" + appellation + ", productType=" + productType
-				+ ", productVarietal=" + productVarietal + ", id=" + idProduct + ", name=" + name
+				+ ", productVarietal=" + productVarietal + ", id=" + id + ", name=" + name
 				+ ", price=" + price + ", description=" + description + ", Urls=" + imagesUrl + "]";
 	}    
     

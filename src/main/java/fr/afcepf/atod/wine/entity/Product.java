@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -43,7 +46,7 @@ public class Product implements Serializable {
 	/**
 	 * id
 	 */
-	protected Integer idProduct;
+	protected Integer id;
 
 	/**
 	 * name
@@ -91,6 +94,11 @@ public class Product implements Serializable {
 	 * suppliers
 	 */
 	private Set<ProductSupplier> productSuppliers = new HashSet<ProductSupplier>(0);
+	
+	 /**
+     * product features
+     */
+    private Set<ProductFeature> features;
 
 	// -------- Constructors ------------ //
 
@@ -108,7 +116,7 @@ public class Product implements Serializable {
 	 * @param description
 	 */
 	public Product(Integer id, String name, Double price, String description) {
-		this.idProduct = id;
+		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.description = description;
@@ -127,7 +135,7 @@ public class Product implements Serializable {
 	public Product(Integer id, String name, Double price, String description, Date createdAt,
 			Set<OrderDetail> orderDetails, Set<ProductSupplier> productSuppliers) {
 		super();
-		this.idProduct = id;
+		this.id= id;
 		this.name = name;
 		this.price = price;
 		this.description = description;
@@ -151,7 +159,7 @@ public class Product implements Serializable {
 	public Product(Integer idProduct, String name, Double price, String description, Date createdAt,
 			SpecialEvent speEvent, Set<OrderDetail> orderDetails, Set<ProductSupplier> productSuppliers) {
 		super();
-		this.idProduct = idProduct;
+		this.id = idProduct;
 		this.name = name;
 		this.price = price;
 		this.description = description;
@@ -169,13 +177,13 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_product", unique = true, nullable = false)
 	public Integer getIdProduct() {
-		return idProduct;
+		return id;
 	}
 
 
 
 	public void setIdProduct(Integer id) {
-		this.idProduct = id;
+		this.id = id;
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -247,10 +255,27 @@ public class Product implements Serializable {
 	public void setImages(String imagesUrl) {
 		this.images = imagesUrl;
 	}
+	
+	/**
+     * @return the features
+     */
+    @ManyToMany(cascade=CascadeType.ALL)
+    @ElementCollection(targetClass=ProductFeature.class)
+    @JoinTable(name="products_features", joinColumns=@JoinColumn(name="id_product"), inverseJoinColumns=@JoinColumn(name="id_feature")) 
+    public Set<ProductFeature> getFeatures() {
+        return features;
+    }
+
+    /**
+     * @param paramFeatures the features to set
+     */
+    public void setFeatures(Set<ProductFeature> paramFeatures) {
+        features = paramFeatures;
+    }
 
 	@Override
 	public String toString() {
-		return "Product [id=" + idProduct + ", name=" + name + ", price=" + price + ", description=" + description
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
 				+ "]";
 	}
 

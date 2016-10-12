@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import de.malkusch.localized.Localized;
+
 /**
  * by roro
  */
@@ -38,6 +40,7 @@ public class ProductVarietal implements Serializable {
     @Column(name     = "description",
             length   = MAX_SIZE * 2,
             nullable = false)
+    @Localized
     private String description;
     
     /**
