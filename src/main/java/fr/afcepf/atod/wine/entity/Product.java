@@ -259,9 +259,11 @@ public class Product implements Serializable {
 	/**
      * @return the features
      */
-    @ManyToMany(cascade=CascadeType.ALL)
-    @ElementCollection(targetClass=ProductFeature.class)
-    @JoinTable(name="products_features", joinColumns=@JoinColumn(name="id_product"), inverseJoinColumns=@JoinColumn(name="id_feature")) 
+    //@ElementCollection(targetClass=ProductFeature.class)
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "products_features", 
+             joinColumns = { @JoinColumn(name = "product_id") }, 
+             inverseJoinColumns = { @JoinColumn(name = "productFeature_id") })
     public Set<ProductFeature> getFeatures() {
         return features;
     }

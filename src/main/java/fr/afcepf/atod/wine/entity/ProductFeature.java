@@ -51,8 +51,8 @@ public class ProductFeature implements Serializable {
     /**
      * wines
      */ 
-    @ElementCollection(targetClass=Product.class)
-    private Set<Product> products;
+    /*@ElementCollection(targetClass=Product.class)
+    private Set<Product> products;*/
     
     /**
      * 
@@ -90,17 +90,15 @@ public class ProductFeature implements Serializable {
     /**
      * @return the wines
      */
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="features") 
+    
+    /*@ElementCollection(targetClass=Product.class)
     public Set<Product> getProducts() {
         return products;
     }
 
-    /**
-     * @param paramWines the wines to set
-     */
     public void setProducts(Set<Product> paramProducts) {
         products = paramProducts;
-    }
+    }*/
 
     /**
      * @return the id
