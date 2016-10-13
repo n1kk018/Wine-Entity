@@ -63,7 +63,7 @@ public class Product implements Serializable {
 	/**
 	 * description
 	 */
-	@Column(name = "description", length = MAX_SIZE * 4, nullable = false)
+	@Column(name = "description", length = MAX_SIZE * 4, nullable = true)
 	protected String description;
 
 	/**
