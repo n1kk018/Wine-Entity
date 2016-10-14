@@ -260,7 +260,7 @@ public class Product implements Serializable {
      * @return the features
      */
     //@ElementCollection(targetClass=ProductFeature.class)
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "products_features", 
              joinColumns = { @JoinColumn(name = "product_id") }, 
              inverseJoinColumns = { @JoinColumn(name = "productFeature_id") })
