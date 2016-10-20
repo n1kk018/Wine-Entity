@@ -69,7 +69,7 @@ public class Order implements Serializable {
 	/**
 	 * details
 	 */
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private Set<OrderDetail> ordersDetail;
 
 	// ------------ Constructors ----------------//
