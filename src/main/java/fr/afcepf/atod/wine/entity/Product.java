@@ -21,6 +21,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -59,7 +60,12 @@ public class Product implements Serializable {
 	 */
 	@Column(name = "price", nullable = false)
 	protected Double price;
-
+	
+	/**
+     * converted price
+     */
+    @Transient
+    protected Double convertedPrice;
 	/**
 	 * description
 	 */
@@ -274,8 +280,27 @@ public class Product implements Serializable {
     public void setFeatures(Set<ProductFeature> paramFeatures) {
         features = paramFeatures;
     }
+    
+    @PostLoad
+    public void setconversionField() {
+        this.convertedPrice = this.price;
+    }
 
-	@Override
+	/**
+     * @return the convertedPrice
+     */
+    public Double getConvertedPrice() {
+        return convertedPrice;
+    }
+
+    /**
+     * @param paramConvertedPrice the convertedPrice to set
+     */
+    public void setConvertedPrice(Double paramConvertedPrice) {
+        convertedPrice = paramConvertedPrice;
+    }
+
+    @Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
 				+ "]";
