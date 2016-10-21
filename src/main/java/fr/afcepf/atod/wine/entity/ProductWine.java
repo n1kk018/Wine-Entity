@@ -34,6 +34,8 @@ public class ProductWine extends Product implements Serializable {
     
     @Transient
 	private static final int MAX_SIZE_PIC = 1024;
+    
+    
   
     /**
      * appellation
@@ -164,8 +166,6 @@ public class ProductWine extends Product implements Serializable {
 		return "ProductWine [appellation=" + appellation + ", productType=" + productType
 				+ ", productVarietal=" + productVarietal + ", id=" + id + ", name=" + name
 				+ ", price=" + price + ", description=" + description + ", Urls=" + imagesUrl + "]";
-	}    
-    
-    
+	}   
     
 }
