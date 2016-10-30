@@ -67,9 +67,9 @@ public class Admin extends User implements Serializable {
     public Admin(Integer id, String lastname, String firstname,
             Date birthdate, String email, String login, String password,
             String phonenumber, Date createdAt, Date updatedAt, 
-            Civility label, Adress adress) {
+            Civility label) {
         super(id, lastname, firstname, birthdate, email, login, password,
-                phonenumber, createdAt, updatedAt, label, adress);
+                phonenumber, createdAt, updatedAt, label);
     }
 
     // -------- getters && setters -------- //

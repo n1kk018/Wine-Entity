@@ -49,6 +49,29 @@ public class Adress implements Serializable {
 	 */
 	@Column(name = "number", length = MAX_SIZE, nullable = true)
 	private String number;
+	
+	/**
+     * zipcode
+     */
+    @Column(name     = "zipcode",
+            length   = MAX_SIZE,
+            nullable = false)
+    private String zipcode;
+
+    /**
+     * city
+     */
+    @Column(name     = "city",
+            length   = MAX_SIZE,
+            nullable = false)
+    private String city;
+    
+    /**
+     * country
+     */
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCountry", nullable = true)
+    private Country country;
 
 	/**
 	 * billing
@@ -57,17 +80,11 @@ public class Adress implements Serializable {
 	private boolean billing;
 
 	/**
-	 * city
-	 */
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idCity", nullable = false)
-	private City city;
-
-	/**
-	 * users
-	 */
-	@OneToMany(mappedBy = "adress")
-	private Set<User> users;
+     * user
+     */
+    @ManyToOne
+    private User user;
+	
 
 	// ---------- constructors ----------- //
 
@@ -85,12 +102,14 @@ public class Adress implements Serializable {
 	 * @param billing
 	 * @param city
 	 */
-	public Adress(Integer id, String street, String number, boolean billing, City city) {
+	public Adress(Integer id, String street, String number, String zipcode, String city, Country country, boolean billing) {
 		this.id = id;
 		this.street = street;
 		this.number = number;
-		this.billing = billing;
+		this.zipcode = zipcode;
 		this.city = city;
+		this.country = country;
+		this.billing = billing;
 	}
 
 	// ------------ getters && setters -------- //
@@ -127,20 +146,35 @@ public class Adress implements Serializable {
 		this.billing = billing;
 	}
 
-	public City getCity() {
-		return city;
-	}
+	public String getZipcode() {
+        return zipcode;
+    }
 
-	public void setCity(City city) {
-		this.city = city;
-	}
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
 
-	public Set<User> getUsers() {
-		return users;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
+    
+    public Country getCountry() {
+        return country;
+    }
 
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User paramUser) {
+        user = paramUser;
+    }
 }

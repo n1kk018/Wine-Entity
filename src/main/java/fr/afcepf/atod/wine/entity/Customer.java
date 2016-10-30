@@ -79,9 +79,9 @@ public class Customer extends User implements Serializable {
                     String firstname, Date birthdate, String email,
                     String login, String password, String phonenumber,
                     Date createdAt, Date updatedAt, Civility civility,
-                    Adress adress, Boolean activated ) {
+                    Boolean activated ) {
         super(id, lastname, firstname, birthdate, email, login, password,
-               phonenumber, createdAt, updatedAt, civility, adress);
+               phonenumber, createdAt, updatedAt, civility);
         this.activated = activated;
     }
     

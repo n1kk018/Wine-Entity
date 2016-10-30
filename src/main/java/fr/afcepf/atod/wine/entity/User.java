@@ -15,6 +15,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -118,11 +119,10 @@ public class User implements Serializable {
     protected  Civility civility;
 
     /**
-     * adress
+     * adresses
      */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idAdresse", nullable = false)
-    protected  Adress adress;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="user")
+    private Set<Adress> adresses=new HashSet<Adress>();
     /**
      * user_type
      */
@@ -151,7 +151,7 @@ public class User implements Serializable {
      */
     public User(Integer id, String lastname, String firstname, Date birthdate,
                 String email, String login, String password, String phonenumber,
-                Date createdAt, Date updatedAt, Civility civility, Adress adress) {
+                Date createdAt, Date updatedAt, Civility civility) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -163,7 +163,6 @@ public class User implements Serializable {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.civility = civility;
-        this.adress = adress;
     }
     // --------- getters && setters ------------ //
 
@@ -261,14 +260,11 @@ public class User implements Serializable {
     public void setCivility(Civility civility) {
         this.civility = civility;
     }
-
-    public Adress getAdress() {
-        return adress;
+    public Set<Adress> getAdresses() {
+        return adresses;
     }
-
-    public void setAdress(Adress adress) {
-        this.adress = adress;
-    }    
-    
-            
+    public void addAdress(Adress adress) {
+        adress.setUser(this);
+        adresses.add(adress);
+    }
 }

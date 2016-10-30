@@ -31,6 +31,14 @@ public class Country implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    /**
+     * name
+     */
+    @Column(name     = "code",
+            length   = MAX_SIZE, 
+            nullable = false)
+    private String code;
 
     /**
      * name
@@ -41,10 +49,10 @@ public class Country implements Serializable {
     private String name;
     
     /**
-     * set Regions
+     * set Adresses
      */
     @OneToMany(mappedBy = "country")
-    private Set<Region> regions;
+    private Set<Adress> adresses;
     
     // ------- Constructors -------//
     
@@ -54,8 +62,9 @@ public class Country implements Serializable {
     public Country() {
     }
 
-    public Country(Integer id, String name) {
+    public Country(Integer id, String code, String name) {
         this.id = id;
+        this.code = code;
         this.name = name;
     }
     
@@ -68,6 +77,14 @@ public class Country implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String paramCode) {
+        code = paramCode;
+    }
 
     public String getName() {
         return name;
@@ -77,14 +94,11 @@ public class Country implements Serializable {
         this.name = name;
     }
 
-    public Set<Region> getRegions() {
-        return regions;
+    public Set<Adress> getAdresses() {
+        return adresses;
     }
 
-    public void setRegions(Set<Region> regions) {
-        this.regions = regions;
+    public void setAdresses(Set<Adress> adresses) {
+        this.adresses = adresses;
     }
-
-    
-
 }
