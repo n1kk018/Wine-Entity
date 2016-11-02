@@ -70,9 +70,9 @@ public class Adress implements Serializable {
     /**
      * country
      */
-    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "idCountry", nullable = true)
-    private Country country;
+    private Country country =new Country();
 
 	/**
 	 * billing
@@ -84,7 +84,7 @@ public class Adress implements Serializable {
      * user
      */
     @ManyToOne
-    private User user;
+    private User user = new User();
 	
 
 	// ---------- constructors ----------- //
