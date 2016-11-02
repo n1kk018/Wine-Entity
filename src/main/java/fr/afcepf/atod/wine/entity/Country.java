@@ -33,7 +33,7 @@ public class Country implements Serializable {
     private Integer id;
     
     /**
-     * name
+     * code
      */
     @Column(name     = "code",
             length   = MAX_SIZE, 
@@ -49,6 +49,22 @@ public class Country implements Serializable {
     private String name;
     
     /**
+     * currency code
+     */
+    @Column(name     = "currency",
+            length   = MAX_SIZE, 
+            nullable = false)
+    private String currency;
+    
+    /**
+     * currency css class
+     */
+    @Column(name     = "currency_class",
+            length   = MAX_SIZE, 
+            nullable = false)
+    private String currencyClass;
+    
+    /**
      * set Adresses
      */
     @OneToMany(mappedBy = "country")
@@ -62,10 +78,12 @@ public class Country implements Serializable {
     public Country() {
     }
 
-    public Country(Integer id, String code, String name) {
+    public Country(Integer id, String code, String name, String currency, String currencyClass) {
         this.id = id;
         this.code = code;
         this.name = name;
+        this.currency = currency;
+        this.currencyClass = currencyClass;
     }
     
     // ------ Getters && Setters --------- //
@@ -100,5 +118,21 @@ public class Country implements Serializable {
 
     public void setAdresses(Set<Adress> adresses) {
         this.adresses = adresses;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String paramCurrency) {
+        currency = paramCurrency;
+    }
+
+    public String getCurrencyClass() {
+        return currencyClass;
+    }
+
+    public void setCurrencyClass(String paramCurrencyClass) {
+        currencyClass = paramCurrencyClass;
     }
 }
