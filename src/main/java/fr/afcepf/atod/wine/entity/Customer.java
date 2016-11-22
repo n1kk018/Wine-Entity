@@ -1,10 +1,13 @@
 package fr.afcepf.atod.wine.entity;
 import java.io.Serializable;
 import java.util.*;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 /**
  * by roro
@@ -17,7 +20,12 @@ public class Customer extends User implements Serializable {
 	 */
 	private static final long serialVersionUID = 708890365167036937L;
 
-
+	/**
+     * adresses
+     */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="user")
+    @OrderBy("billing asc")
+    private List<Adress> adresses=new ArrayList<Adress>();
 	/**
      * comments
      */
@@ -110,5 +118,12 @@ public class Customer extends User implements Serializable {
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
-        
+    
+    public List<Adress> getAdresses() {
+        return adresses;
+    }
+    public void addAdress(Adress adress) {
+        adress.setUser(this);
+        adresses.add(adress);
+    }
 }
