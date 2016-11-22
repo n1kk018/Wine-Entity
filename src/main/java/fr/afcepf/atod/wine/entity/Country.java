@@ -57,6 +57,14 @@ public class Country implements Serializable {
     private String currency;
     
     /**
+     * currency code
+     */
+    @Column(name     = "currency_lbl",
+            length   = MAX_SIZE, 
+            nullable = false)
+    private String currencyLbl;
+    
+    /**
      * currency css class
      */
     @Column(name     = "currency_class",
@@ -78,11 +86,12 @@ public class Country implements Serializable {
     public Country() {
     }
 
-    public Country(Integer id, String code, String name, String currency, String currencyClass) {
+    public Country(Integer id, String code, String name, String currency, String currencyLbl, String currencyClass) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.currency = currency;
+        this.currencyLbl = currencyLbl;
         this.currencyClass = currencyClass;
     }
     
@@ -126,6 +135,15 @@ public class Country implements Serializable {
 
     public void setCurrency(String paramCurrency) {
         currency = paramCurrency;
+    }
+    
+
+    public String getCurrencyLbl() {
+        return currencyLbl;
+    }
+
+    public void setCurrencyLbl(String paramCurrencyLbl) {
+        currencyLbl = paramCurrencyLbl;
     }
 
     public String getCurrencyClass() {
