@@ -1,6 +1,7 @@
 package fr.afcepf.atod.wine.entity;
 
 import java.io.Serializable;
+
 import java.util.*;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
