@@ -9,6 +9,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.plugin>3.5.1</maven.compiler.plugin>
         <javaee.version>7.0</javaee.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
     <dependencies>
@@ -16,7 +17,7 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>${javaee.version}</version>
-            <scope>provided</scope>
+             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>de.malkusch.localized</groupId>
